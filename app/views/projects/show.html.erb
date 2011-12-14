@@ -30,6 +30,6 @@
       <p><%= user.email %></p>
   <% end %>
 </p>
-
+<%= link_to 'Add Task', new_task_path %> |
 <%= link_to 'Edit', edit_project_path(@project) %> |
 <%= link_to 'Back', projects_path %>
