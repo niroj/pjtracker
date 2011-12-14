@@ -6,6 +6,11 @@ gem 'rails', '3.1.3'
 # gem 'rails',     :git => 'git://github.com/rails/rails.git'
 
 gem 'sqlite3'
+gem 'devise'
+
+group :development do
+  gem 'nifty-generators'
+end
 
 
 # Gems used only for assets and not required
@@ -29,8 +34,26 @@ gem 'jquery-rails'
 
 # To use debugger
 # gem 'ruby-debug19', :require => 'ruby-debug'
+group :test, :development do
+  gem 'rspec-rails'
+#  gem 'ruby-debug19', :require => 'ruby-debug'
+  gem 'pry'
+  gem 'pry-doc'
+end
+
+group :test do
+  gem 'factory_girl_rails'
+  gem 'launchy'
+  gem 'capybara'
+  gem 'database_cleaner'
+  gem 'valid_attribute'
+
+  gem 'rb-fsevent', :require => false if RUBY_PLATFORM =~ /darwin/i
+  gem 'guard-rspec'
+end
 
 group :test do
   # Pretty printed test output
-  gem 'turn', '~> 0.8.3', :require => false
+  gem 'turn', '0.8.2', :require => false
+  gem 'rspec'
 end
