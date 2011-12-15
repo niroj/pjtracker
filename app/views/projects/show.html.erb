@@ -25,11 +25,38 @@
 </p>
 
 <p>
-<b>Users:</b>
+  <b>Users:</b>
   <% @project.users.each do |user| %>
-      <p><%= user.email %></p>
+  <p><%= user.email %></p>
   <% end %>
 </p>
-<%= link_to 'Add Task', new_task_path %> |
+
+<div id="task_container">
+  <h2>Tasks</h2>
+  <%= render @tasks %>
+</div>
+
+<div id="task_form">
+
+  <p>Add Task</p>
+  <%= form_for([@project, Task.new]) do |f| %>
+
+  <%= f.label "Name:"%>
+  <%= f.text_field :name %><br /><br />
+  <%= f.label "Status:"%>
+  <%= f.text_field :status %><br /><br />
+  <%= f.label :user %><br />
+    <% @project.users.each do |u| %>
+      <%= radio_button_tag('task_user_id', u.id) %>
+      <%= label_tag(u.id, u.email) %>
+      <br />
+      <% end %>
+  <%= f.submit %>
+
+  <% end %>
+
+</div>
+
+
 <%= link_to 'Edit', edit_project_path(@project) %> |
 <%= link_to 'Back', projects_path %>
