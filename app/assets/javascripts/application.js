@@ -9,7 +9,7 @@
 //= require_tree .
 $(document).ready(function(){
 
-  $('#task_form').hide();
+  // $('#task_form').hide();
 
   $('#new_task a').live("click",function(){
      $('#task_form').slideToggle();
