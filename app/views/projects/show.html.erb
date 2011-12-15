@@ -33,30 +33,58 @@
 
 <div id="task_container">
   <h2>Tasks</h2>
-  <%= render @tasks %>
-</div>
+  <div id="tasks">
+    <table width = 100%>
+      <tr>
+        <td>
+          <b>Task Name</b>
+        </td>
+        <td>
+          <b>Assigned to</b>
+        </td>
+        <td>
+          <b>Status</b>
+        </td>
+      </tr>
 
-<div id="task_form">
-
-  <p>Add Task</p>
-  <%= form_for([@project, Task.new]) do |f| %>
-
-  <%= f.label "Name:"%>
-  <%= f.text_field :name %><br /><br />
-  <%= f.label "Status:"%>
-  <%= f.text_field :status %><br /><br />
-  <%= f.label :user %><br />
-    <% @project.users.each do |u| %>
-      <%= radio_button_tag('task_user_id', u.id) %>
-      <%= label_tag(u.id, u.email) %>
-      <br />
+      <% @tasks.each do |task| %>
+      <tr>
+        <td>
+          <%= task.name %><br />
+        </td>
+        <% @user = User.find(task.user_id)%>
+        <td>
+          <%= @user.email %>
+        </td>
+        <td>
+          <%= task.status %><br />
+        </td>
+      </tr>
       <% end %>
-  <%= f.submit %>
-
-  <% end %>
+      <tr id = "new_task">
+        <td>
+          <a href = "#">Add Task</a>
+        </td>
+      </tr>
+      <tr id = "task_form">
+        <%= form_for([@project, Task.new]) do |f| %>
+        <td>
+          <%= f.text_field :name, :placeholder => "Task Name" %>
+        </td>
+        <td>
+          <%= select_tag "task_user_id", options_from_collection_for_select(@project.users, "id", "email") %>
+        </td>
+        <td>
+          <%= f.text_field :status, :placeholder => "Status" %>
+          <%= f.submit %>
+        </td>
+        <% end %>
+      </tr>
+    </table>
+  </div>
+  <br />
 
 </div>
-
 
 <%= link_to 'Edit', edit_project_path(@project) %> |
 <%= link_to 'Back', projects_path %>

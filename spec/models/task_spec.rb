@@ -1,5 +1,9 @@
 require 'spec_helper'
 
 describe Task do
-  pending "add some examples to (or delete) #{__FILE__}"
+      it {should have_valid(:name).when('css coding', 'testing') }
+      it {should_not have_valid(:name).when('','ward no. 9') }
+      it {should have_valid(:status).when('in progress', 'postponed', 'canceled') }
+      it {should_not have_valid(:status).when('', 'nice', 'we'*200) }
+
 end

@@ -1,7 +1,36 @@
 <div id="tasks">
-     <b><%= task.name %></b><br />
-      <% user = User.find(task.user_id)%>
-      <b><%= user.email %></b>
-     <%= task.status %><br />
+  <table width = 100%>
+
+    <tr>
+      <td>
+        Task Name
+      </td>
+      <td>
+        Assigned to
+      </td>
+      <td>
+        Status
+      </td>
+    </tr>
+
+    <tr>
+      <td>
+        <%= task.name %><br />
+      </td>
+      <% @user = User.find(task.user_id)%>
+      <td>
+        <%= @user.email %>
+      </td>
+      <td>
+        <%= task.status %><br />
+      </td>
+    </tr>
+    <tr id = "new task">
+      <td>
+          <a href = "#">Add Task</a>
+      </td>
+    </tr>
+
+  </table>
 </div>
 <br />
