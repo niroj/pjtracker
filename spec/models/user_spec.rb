@@ -1,8 +1,9 @@
 require 'spec_helper'
 
 describe User do
-  it {should have_valid(:name).when('cloud factory', 'the palace', 'ward no 9') }
-  it {should_not have_valid(:name).when('',123123123) }
-  it {should have_valid(:status).when('in progress', 'postponed', 'canceled') }
-  it {should_not have_valid(:status).when('', 'nic', 'we'*200) }
+
+  it {should have_valid(:email).when('lujaw@hotmail.com') }
+  it {should_not have_valid(:email).when('asdfasdf','','asdf@hj') }
+  it { should validate_presence_of :email }
+
 end

@@ -37,26 +37,38 @@ class ProjectsController < ApplicationController
   # GET /projects/1/edit
   def edit
     @project = Project.find(params[:id])
+    if @project.project_head != current_user.id
+      flash[:alert] = "You are not allowed to edit the project you didnot created"
+      redirect_to project_path
+    end
   end
 
   # POST /projects
   # POST /projects.json
   def create
     @project = Project.new(params[:project])
+    @project.project_head = current_user.id
     @users = params[:project_user_id]
 
-    respond_to do |format|
-      if @project.save
-        @users.each do |u1|
-          @u = User.find(u1)
-          @project.users<<@u
-        end
+    if @users.nil?
+      flash[:alert] = "Please select atleast one user"
+      render :new
+    else
 
-        format.html { redirect_to @project, notice: 'Project was successfully created.' }
-        format.json { render json: @project, status: :created, location: @project }
-      else
-        format.html { render action: "new" }
-        format.json { render json: @project.errors, status: :unprocessable_entity }
+      respond_to do |format|
+        if @project.save
+
+          @users.each do |u1|
+            @u = User.find(u1)
+            @project.users<<@u
+          end
+
+          format.html { redirect_to @project, notice: 'Project was successfully created.' }
+          format.json { render json: @project, status: :created, location: @project }
+        else
+          format.html { render action: "new" }
+          format.json { render json: @project.errors, status: :unprocessable_entity }
+        end
       end
     end
   end

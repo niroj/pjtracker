@@ -1,7 +1,7 @@
 PjtrackerV11::Application.routes.draw do
 
   resources :projects do
-    resources :tasks
+    resources :tasks, :only => [:create, :edit]
   end
 
   devise_for :users

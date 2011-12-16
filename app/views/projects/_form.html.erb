@@ -39,7 +39,7 @@
   <div class="field">
     <%= f.label :user %><br />
     <% User.find(:all).each do |u| %>
-    <%= check_box_tag('project_user_id[]', u.id) %>
+    <%= check_box_tag('project_user_id[]', u.id, @project.users.include?(u)) %>
     <%= label_tag(u.id, u.email) %>
     <br />
     <% end %>

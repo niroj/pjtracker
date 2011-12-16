@@ -6,7 +6,7 @@ describe "log_in" do
 
     user = Factory(:user)
 
-    visit "/users/sign_in"
+    visit user_session_path
     fill_in "Email", :with => "person1@example.com"
     fill_in "Password", :with => "anything"
     click_button "Sign in"
@@ -19,7 +19,7 @@ describe "log_in" do
 
     user = Factory(:user)
 
-    visit "/users/sign_in"
+    visit user_session_path
     fill_in "Email", :with => "person1@example.com"
     fill_in "Password", :with => "invalidPassword"
     click_button "Sign in"
@@ -32,7 +32,7 @@ describe "log_in" do
 
     user = Factory(:user)
 
-    visit "/users/sign_in"
+    visit user_session_path
     fill_in "Email", :with => "notaemail@example.com"
     fill_in "Password", :with => "anything"
     click_button "Sign in"
@@ -45,7 +45,7 @@ describe "log_in" do
 
     user = Factory(:user)
 
-    visit "/users/sign_in"
+    visit user_session_path
     fill_in "Email", :with => ""
     fill_in "Password", :with => "anything"
     click_button "Sign in"
@@ -58,7 +58,7 @@ describe "log_in" do
 
     user = Factory(:user)
 
-    visit "/users/sign_in"
+    visit user_session_path
     fill_in "Email", :with => "person1@example.com"
     fill_in "Password", :with => ""
     click_button "Sign in"
@@ -71,7 +71,7 @@ describe "log_in" do
 
     user = Factory(:user)
 
-    visit "/users/sign_in"
+    visit user_session_path
     fill_in "Email", :with => ""
     fill_in "Password", :with => ""
     click_button "Sign in"

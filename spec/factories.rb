@@ -13,9 +13,9 @@ FactoryGirl.define do
   end
 
   factory :project do
+    user
     name "Cloud Factory"
     description "workers in the cloud"
-    user
   end
 
 

@@ -5,13 +5,14 @@
 </p>
 
 <p>
-  <b>Status:</b>
-  <%= @project.status %>
+  <b>Created By:</b>
+  <% user = User.find(@project.project_head) %>
+  <%= user.email%>
 </p>
 
 <p>
-  <b>Deadline:</b>
-  <%= @project.deadline %>
+  <b>Status:</b>
+  <%= @project.status %>
 </p>
 
 <p>
@@ -25,6 +26,11 @@
 </p>
 
 <p>
+  <b>Deadline:</b>
+  <%= @project.deadline %>
+</p>
+
+<p>
   <b>Users:</b>
   <% @project.users.each do |user| %>
   <p><%= user.email %></p>
@@ -34,6 +40,7 @@
 <div id="task_container">
   <h2>Tasks</h2>
   <div id="tasks">
+
     <table width = 100%>
       <tr>
         <td>
@@ -45,6 +52,9 @@
         <td>
           <b>Status</b>
         </td>
+        <td>
+          <b>Actions</b>
+        </td>
       </tr>
 
       <% @tasks.each do |task| %>
@@ -54,13 +64,19 @@
         </td>
         <% @user = User.find(task.user_id)%>
         <td>
-          <%= @user.email %>
+          <%= best_in_place @user, :email %>
         </td>
         <td>
           <%= task.status %><br />
         </td>
+        <td>
+          <%= link_to "Edit", edit_project_task_path(@project) %>
+        </td>
       </tr>
       <% end %>
+
+      <% if user_signed_in? && (@project.project_head == current_user.id) %>
+
       <tr id = "task_form">
         <%= form_for([@project, Task.new]) do |f| %>
         <td>
@@ -69,12 +85,14 @@
         <td>
           <%= select_tag "task_user_id", options_from_collection_for_select(@project.users, "id", "email") %>
         </td>
-        <td>
+        <td colspan = 2>
           <%= f.text_field :status, :placeholder => "Status" %>
           <%= f.submit %>
         </td>
         <% end %>
       </tr>
+
+      <% end %>
     </table>
   </div>
   <br />

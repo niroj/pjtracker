@@ -4,7 +4,7 @@ describe "Registration" do
 
   it "should allow validated user to signup" do
 
-    new_user_registration_path
+    visit new_user_registration_path
     fill_in "Email", :with => "p@example.com"
     fill_in "Password", :with => "secret"
     fill_in "Password confirmation", :with => "secret"
@@ -17,7 +17,7 @@ describe "Registration" do
   it "should not allow user to signup with already registered username" do
 
     user = Factory(:user, :email => 'check@yahoo.com')
-    visit "/users/sign_up"
+    visit new_user_registration_path
     fill_in "Email", :with => user.email
     fill_in "Password", :with => user.password
     fill_in "Password confirmation", :with => user.password
@@ -30,7 +30,7 @@ describe "Registration" do
 
   it "should not allow email to be empty" do
 
-    visit "/users/sign_up"
+    visit new_user_registration_path
     fill_in "Email", :with => ""
     fill_in "Password", :with => "secret"
     fill_in "Password confirmation", :with => "secret"
@@ -42,7 +42,7 @@ describe "Registration" do
 
   it "should not allow blank password" do
 
-    visit "/users/sign_up"
+    visit new_user_registration_path
     fill_in "Email", :with => "asdf@hads.com"
     fill_in "Password", :with => ""
     fill_in "Password confirmation", :with => ""
@@ -54,7 +54,7 @@ describe "Registration" do
 
   it "should match the password" do
 
-    visit "/users/sign_up"
+    visit new_user_registration_path
     fill_in "Email", :with => "d@h.com"
     fill_in "Password", :with => "anything"
     fill_in "Password confirmation", :with => "secret"
@@ -66,7 +66,7 @@ describe "Registration" do
 
   it "should not allow password less thean 6 character" do
 
-    visit "/users/sign_up"
+    visit new_user_registration_path
     fill_in "Email", :with => "d@h.com"
     fill_in "Password", :with => "any"
     fill_in "Password confirmation", :with => "any"
