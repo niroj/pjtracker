@@ -8,6 +8,8 @@ gem 'rails', '3.1.3'
 gem 'sqlite3'
 gem 'devise'
 gem 'best_in_place'
+gem 'rails3-jquery-autocomplete'
+gem 'will_paginate'
 
 group :development do
   gem 'nifty-generators'

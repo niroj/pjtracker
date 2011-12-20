@@ -1,7 +1,7 @@
 
 <p>
   <b>Name:</b>
-  <%= @project.name %>
+  <%= best_in_place @project, :name %>
 </p>
 
 <p>
@@ -12,22 +12,22 @@
 
 <p>
   <b>Status:</b>
-  <%= @project.status %>
+  <%= best_in_place @project, :status %>
 </p>
 
 <p>
   <b>Description:</b>
-  <%= @project.description %>
+  <%= best_in_place @project, :description, :type => :textarea %>
 </p>
 
 <p>
   <b>Start date:</b>
-  <%= @project.start_date %>
+  <%= best_in_place @project, :start_date %>
 </p>
 
 <p>
   <b>Deadline:</b>
-  <%= @project.deadline %>
+  <%= best_in_place @project, :deadline %>
 </p>
 
 <p>
@@ -64,7 +64,7 @@
         </td>
         <% @user = User.find(task.user_id)%>
         <td>
-          <%= best_in_place @user, :email %>
+          <%= @user.email %>
         </td>
         <td>
           <%= task.status %><br />
@@ -90,10 +90,13 @@
           <%= f.submit %>
         </td>
         <% end %>
+
+
       </tr>
 
       <% end %>
     </table>
+   <%= will_paginate @tasks %>
   </div>
   <br />
 

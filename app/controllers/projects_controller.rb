@@ -1,6 +1,7 @@
 class ProjectsController < ApplicationController
   # GET /projects
   # GET /projects.json
+  autocomplete :project, :name
   before_filter :authenticate_user!, :except => [:index, :show]
   def index
     @projects = Project.all
@@ -15,7 +16,8 @@ class ProjectsController < ApplicationController
   # GET /projects/1.json
   def show
     @project = Project.find(params[:id])
-    @tasks = @project.tasks
+    @tasks = @project.tasks.paginate(:page => params[:page], :per_page => 5)
+
 
     respond_to do |format|
       format.html # show.html.erb

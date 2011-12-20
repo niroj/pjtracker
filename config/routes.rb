@@ -11,6 +11,10 @@ PjtrackerV11::Application.routes.draw do
 
   root :to => "projects#index"
 
+  resources :projects do
+    get :autocomplete_project_name, :on => :collection
+  end
+
   # Sample of regular route:
   #   match 'products/:id' => 'catalog#view'
   # Keep in mind you can assign values other than :controller and :action
